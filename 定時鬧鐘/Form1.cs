@@ -130,8 +130,8 @@ namespace 定時鬧鐘
             this.player.Play();
             await waitForFewSeconds(10); // 10秒鐘 
             this.player.Stop();
-            this.isPlaying = false;
             await waitForFewSeconds(50); // 50秒鐘 
+            this.isPlaying = false;
         }
 
         private Task<int> waitForFewSeconds(int seconds)
@@ -167,8 +167,8 @@ namespace 定時鬧鐘
                 }
             }
         }
-
-        public void monitorSchedule()
+        
+        private void monitorSchedule()
         {
             while (true)
             {
@@ -183,6 +183,7 @@ namespace 定時鬧鐘
                         this.playerThread = new Thread(this.playMusic);
                         this.playerThread.Start();
                         this.textBox1.Text += this.schedule[time] + "\r\n";
+                        //this.schedule.Remove(time);
                     }
                 }
                 Thread.Sleep(10 * 1000);
