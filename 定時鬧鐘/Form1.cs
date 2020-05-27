@@ -130,6 +130,9 @@ namespace 定時鬧鐘
             await waitForFewSeconds(60);
             this.player.Stop();
             this.isPlaying = false;
+
+            this.blockMusicThread = new Thread(() => this.stopPlayingMusic(true));
+            this.blockMusicThread.Start();
         }
 
         private Task<int> waitForFewSeconds(int seconds)
