@@ -110,14 +110,15 @@ namespace 定時鬧鐘
                 if (this.player != null)
                 {
                     this.player.Stop();
-                    if (blockAlarm)
-                    {
-                        this.shouldStopForAWhile = true;
-                        await waitForFewSeconds(59);
-                        this.shouldStopForAWhile = false;
-                    }
                 }
                 this.isPlaying = false;
+            }
+
+            if (blockAlarm)
+            {
+                this.shouldStopForAWhile = true;
+                await waitForFewSeconds(59);
+                this.shouldStopForAWhile = false;
             }
         }
 
@@ -127,7 +128,7 @@ namespace 定時鬧鐘
             this.player = new SoundPlayer();
             this.player.SoundLocation = @".\music.wav";
             this.player.Play();
-            await waitForFewSeconds(60);
+            await waitForFewSeconds(10); // 10秒鐘 
             this.player.Stop();
             this.isPlaying = false;
 
