@@ -35,7 +35,7 @@ namespace 定時鬧鐘
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             //DialogResult dResult = MessageBox.Show("確定要離開系統?", "離開系統", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            DialogResult dResult = MessageBox.Show("這樣做會導致排程鬧鐘停止運作，確定要關閉程式？", "關閉程式", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            DialogResult dResult = MessageBox.Show("這樣做會導致排程鬧鐘停止運作，確定要關閉程式嗎？", "關閉程式", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             if (dResult == DialogResult.No)
             {
                 e.Cancel = true;
@@ -145,7 +145,6 @@ namespace 定時鬧鐘
                 var text = sr.ReadToEnd();
                 text = text.Trim(' ').Trim('\n').Trim('\t');
                 var tsArr = text.Split(';');
-                var i = 0;
                 foreach (string s in tsArr)
                 {
                     if (string.IsNullOrEmpty(s)) continue;
@@ -158,11 +157,10 @@ namespace 定時鬧鐘
                         var minute = int.Parse(tsArr3[1]);
                         var time = hour * 60 + minute;
                         this.schedule[time] = comment;
-                        i += 1;
                     }
                     catch (Exception ex)
                     {
-                        this.textBox1.Text += ex.ToString();
+                        this.textBox1.Text += ex.ToString() + "\r\n";
                     }
                 }
             }
@@ -182,7 +180,7 @@ namespace 定時鬧鐘
                     {
                         this.playerThread = new Thread(this.playMusic);
                         this.playerThread.Start();
-                        this.textBox1.Text += this.schedule[time] + "\n";
+                        this.textBox1.Text += this.schedule[time] + "\r\n";
                     }
                 }
                 Thread.Sleep(10 * 1000);
