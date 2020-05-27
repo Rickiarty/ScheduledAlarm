@@ -22,6 +22,7 @@ namespace 定時鬧鐘
         {
             InitializeComponent();
 
+            this.button2.Enabled = false;
             this.readSchedule(@".\schedule.txt");
         }
 
@@ -120,17 +121,21 @@ namespace 定時鬧鐘
                 await waitForFewSeconds(59);
                 this.shouldStopForAWhile = false;
             }
+
+            this.button2.Enabled = false;
         }
 
         async private void playMusic()
         {
             this.isPlaying = true;
+            this.button2.Enabled = true;
             this.player = new SoundPlayer();
             this.player.SoundLocation = @".\music.wav";
             this.player.Play();
             await waitForFewSeconds(10); // 10秒鐘 
             this.player.Stop();
             this.isPlaying = false;
+            this.button2.Enabled = false;
 
             this.blockMusicThread = new Thread(() => this.stopPlayingMusic(true));
             this.blockMusicThread.Start();
