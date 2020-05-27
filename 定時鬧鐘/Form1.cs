@@ -128,9 +128,8 @@ namespace 定時鬧鐘
             this.player = new SoundPlayer();
             this.player.SoundLocation = @".\music.wav";
             this.player.Play();
-            await waitForFewSeconds(10); // 10秒鐘 
+            await waitForFewSeconds(60); // 1分鐘 
             this.player.Stop();
-            await waitForFewSeconds(50); // 50秒鐘 
             this.isPlaying = false;
         }
 
