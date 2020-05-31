@@ -117,7 +117,7 @@ namespace 定時鬧鐘
             if (blockAlarm)
             {
                 this.shouldStopForAWhile = true;
-                await waitForFewSeconds(59);
+                await waitFewSeconds(59);
                 this.shouldStopForAWhile = false;
             }
         }
@@ -128,12 +128,13 @@ namespace 定時鬧鐘
             this.player = new SoundPlayer();
             this.player.SoundLocation = @".\music.wav";
             this.player.Play();
-            await waitForFewSeconds(60); // 1分鐘 
+            await waitFewSeconds(10); // 10秒鐘 
             this.player.Stop();
+            await waitFewSeconds(50); // 50秒鐘 
             this.isPlaying = false;
         }
 
-        private Task<int> waitForFewSeconds(int seconds)
+        private Task<int> waitFewSeconds(int seconds)
         {
             Thread.Sleep(1000 * seconds);
             return Task<int>.Factory.StartNew(() => seconds);
