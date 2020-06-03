@@ -21,7 +21,7 @@ namespace 定時鬧鐘
         public Form1()
         {
             InitializeComponent();
-            
+
             this.readSchedule(@".\schedule.txt");
         }
 
@@ -43,7 +43,7 @@ namespace 定時鬧鐘
             else
             {
                 this.stopPlayingMusic(false);
-                this.deinitialize();
+                this.DeInitialize();
             }
         }
 
@@ -82,7 +82,7 @@ namespace 定時鬧鐘
             this.WindowState = FormWindowState.Normal;
         }
 
-        private void deinitialize()
+        void DeInitialize()
         {
             if (this.blockMusicThread != null)
             {
@@ -128,9 +128,9 @@ namespace 定時鬧鐘
             this.player = new SoundPlayer();
             this.player.SoundLocation = @".\music.wav";
             this.player.Play();
-            await waitFewSeconds(10); // 10秒鐘 
+            await waitFewSeconds(15); // 15秒鐘 
             this.player.Stop();
-            await waitFewSeconds(50); // 50秒鐘 
+            await waitFewSeconds(45); // 45秒鐘 
             this.isPlaying = false;
         }
 
@@ -162,13 +162,13 @@ namespace 定時鬧鐘
                     }
                     catch (Exception ex)
                     {
-                        this.textBox1.Text += ex.ToString() + "\r\n";
+                        textBox1.Text += ex.ToString() + "\r\n";
                     }
                 }
             }
         }
         
-        private void monitorSchedule()
+        async private void monitorSchedule()
         {
             while (true)
             {
@@ -182,11 +182,11 @@ namespace 定時鬧鐘
                     {
                         this.playerThread = new Thread(this.playMusic);
                         this.playerThread.Start();
-                        this.textBox1.Text += this.schedule[time] + "\r\n";
+                        //textBox1.Text += this.schedule[time] + "\r\n";
                         //this.schedule.Remove(time);
                     }
                 }
-                Thread.Sleep(10 * 1000);
+                await this.waitFewSeconds(10);
             }
         }
 
