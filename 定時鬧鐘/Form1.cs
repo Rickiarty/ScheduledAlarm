@@ -27,7 +27,7 @@ namespace 定時鬧鐘
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.scheduleThread = new Thread(this.monitorSchedule);
+            this.scheduleThread = new Thread(this.monitorScheduledEvents);
             this.scheduleThread.Start();
             this.notifyIcon1.Visible = false;
         }
@@ -168,7 +168,7 @@ namespace 定時鬧鐘
             }
         }
         
-        async private void monitorSchedule()
+        async private void monitorScheduledEvents()
         {
             while (true)
             {
