@@ -10,12 +10,12 @@ namespace 定時鬧鐘
 {
     public partial class Form1 : Form
     {
-        private bool isPlaying = false;
-        private bool shouldStopForAWhile = false;
-        private Thread playerThread = null;
-        private Thread scheduleThread = null;
-        private Thread blockMusicThread = null;
-        private SoundPlayer player = new SoundPlayer();
+        bool isPlaying = false;
+        bool shouldStopForAWhile = false;
+        Thread playerThread = null;
+        Thread scheduleThread = null;
+        Thread blockMusicThread = null;
+        SoundPlayer player = new SoundPlayer();
         Dictionary<int, string> schedule = new Dictionary<int, string>();
 
         public Form1()
@@ -103,7 +103,7 @@ namespace 定時鬧鐘
             }
         }
 
-        async private void stopPlayingMusic(bool blockAlarm)
+        async void stopPlayingMusic(bool blockAlarm)
         {
             if (isPlaying)
             {
@@ -122,25 +122,25 @@ namespace 定時鬧鐘
             }
         }
 
-        async private void playMusic()
+        async void playMusic()
         {
             this.isPlaying = true;
             this.player = new SoundPlayer();
             this.player.SoundLocation = @".\music.wav";
             this.player.Play();
-            await waitFewSeconds(15); // 15秒鐘 
+            await waitFewSeconds(22); // 22秒鐘 
             this.player.Stop();
-            await waitFewSeconds(45); // 45秒鐘 
+            await waitFewSeconds(38); // 38秒鐘 
             this.isPlaying = false;
         }
 
-        private Task<int> waitFewSeconds(int seconds)
+        Task<int> waitFewSeconds(int seconds)
         {
             Thread.Sleep(1000 * seconds);
             return Task<int>.Factory.StartNew(() => seconds);
         }
 
-        private void readSchedule(string scheduleFilePath)
+        void readSchedule(string scheduleFilePath)
         {
             using (StreamReader sr = new StreamReader(scheduleFilePath))
             {
@@ -168,7 +168,7 @@ namespace 定時鬧鐘
             }
         }
         
-        async private void monitorScheduledEvents()
+        async void monitorScheduledEvents()
         {
             while (true)
             {
