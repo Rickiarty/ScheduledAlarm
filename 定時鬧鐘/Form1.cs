@@ -72,7 +72,7 @@ namespace 定時鬧鐘
 
         private void notifyIcon1_MouseMove(object sender, MouseEventArgs e)
         {
-            this.notifyIcon1.ShowBalloonTip(3000);
+            //this.notifyIcon1.ShowBalloonTip(3000);
         }
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
